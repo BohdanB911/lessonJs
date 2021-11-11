@@ -122,29 +122,21 @@ let newIdThird = {
     }]
 };
 
-contactList.push(newIdFirst, newIdSecond, newIdThird);
+// contactList.push(newIdFirst, newIdSecond, newIdThird);
 
-const sortName = contactList.sort((a, b) => {
-    if (a.first_name < b.first_name) { return -1; }
-    if (a.first_name > b.first_name) { return 1; }
-    return 0;
+// const sortName = contactList.sort((a, b) => {
+//     if (a.first_name < b.first_name) { return -1; }
+//     if (a.first_name > b.first_name) { return 1; }
+//     return 0;
+// });
+
+// let newArr = sortName.filter((i) => i.last_name !== '' && i.nick_name !== '')
+// console.log(newArr)
+
+console.log(contactList)
+
+let searchValue = contactList.find(function(item) {
+    return item.phone === 9700000
 });
 
-let newArr = sortName.filter((i) => i.last_name !== '' && i.nick_name !== '')
-console.log(newArr)
-
-let gettingGroupId = contactList.map((elem) => {
-    let objItem = elem.group[0];
-    let keys = Object.values(objItem);
-    for (item of keys) {
-        if (item > 2) {
-            keys.pop()
-
-        }
-    }
-
-    console.log(doublePrices)
-    return elem
-})
-
-console.log(gettingGroupId)
+console.log(searchValue)
