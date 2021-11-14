@@ -14,3 +14,24 @@ body {
 #form button:focus {
     background-color: chocolate;
 }
+
+.divTest {
+    margin-top: 50px;
+    margin-bottom: 100px;
+    width: 200px;
+    height: 200px;
+    border: 3px dashed wheat;
+}
+
+td {
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+}
+
+tr {
+    border: 1px solid red;
+    min-height: 50px;
+    width: 100%;
+    background-color: blue;
+}

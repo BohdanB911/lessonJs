@@ -161,22 +161,68 @@
 
 
 ////////////////////////2/////////////
-let img = document.getElementsByTagName('img')
-console.log(img)
-let images = [
-    './images/1.jpg',
-    './images/2.jpg',
-    './images/3.jpg',
-    './images/4.jpg',
-    './images/5.jpg',
-];
-console.log(images)
+// let images = [
+//     './images/1.jpg',
+//     './images/2.jpg',
+//     './images/3.jpg',
+//     './images/4.jpg',
+//     './images/5.jpg',
+// ];
+
+// images.forEach(src => {
+//     const img = document.createElement('img');
+//     img.src = src;
+//     console.log(src)
+//     const div = document.createElement('div');
+//     div.className = 'img_item-wrap';
+//     div.append(img);
+
+//     document.querySelector('#img_wrap').append(div);
+// });
 
 
-for (let j = 0; j < img.length; j++) {
-    if (img[j].hasAttribute("src") === false) {
-        for (i = 0; i < images.length; i++) {
-            img[j].setAttribute("src", i)
-        }
-    }
-}
+///////////////////////////////3//////////////
+let selVal = document.querySelector('select');
+// let sel = document.querySelector('select').options;
+let testBlock = document.getElementsByClassName('divTest')[0];
+selVal.selected = testBlock.style.backgroundColor = 'red';
+
+selVal.addEventListener('change', function() {
+    if (selVal.value === 'red') testBlock.style.backgroundColor = 'red';
+    if (selVal.value === 'blue') testBlock.style.backgroundColor = 'blue';
+    if (selVal.value === 'green') testBlock.style.backgroundColor = 'green';
+    if (selVal.value === 'yelow') testBlock.style.backgroundColor = 'yellow';
+
+})
+
+/////////////////////////4//////////////////////
+
+const form = document.getElementById('form');
+console.log(form)
+const rows = document.getElementById('row');
+console.log(rows)
+const columns = document.getElementById('column');
+console.log(columns)
+const table = document.getElementById('table');
+console.log(table)
+let btn2 = document.querySelector('.btn2');
+console.log(btn2)
+
+
+
+
+let arrRow = [];
+let arrCol = [];
+
+btn2.addEventListener('click', function(e) {
+    e.preventDefault();
+
+
+    arrRow.push(rows.value)
+
+    arrCol.push(columns.value)
+
+});
+
+console.log(arrRow);
+console.log(arrCol)
