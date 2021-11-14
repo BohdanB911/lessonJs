@@ -26,101 +26,101 @@
 
 /////////////////////////////////////////////////////// DZ///////////////////////////////////////////////
 
-const contactList = [{
-        id: 2,
-        first_name: 'Vasya',
-        last_name: 'Petrov',
-        nick_name: '',
-        phone: 093945394,
-        group: [{
-            name: 'friends',
-            id: 2
-        }],
-        actions: null
-    },
-    {
-        id: 1,
-        first_name: 'Petya',
-        last_name: '',
-        nick_name: 'Sizo',
-        phone: 09722122,
-        group: [{
-            name: 'best_friends',
-            id: 1
-        }],
-        actions: [{
-            name: 'missed call',
-            value: 3,
-            id: 1
-        }]
-    },
-    {
-        id: 5,
-        first_name: 'Rustem',
-        last_name: '',
-        nick_name: 'Box',
-        phone: 09700000,
-        group: [{
-            name: 'other',
-            id: 3
-        }],
-        actions: [{
-            name: 'missed call',
-            value: 13,
-            id: 1
-        }]
-    }
-];
+// const contactList = [{
+//         id: 2,
+//         first_name: 'Vasya',
+//         last_name: 'Petrov',
+//         nick_name: '',
+//         phone: 093945394,
+//         group: [{
+//             name: 'friends',
+//             id: 2
+//         }],
+//         actions: null
+//     },
+//     {
+//         id: 1,
+//         first_name: 'Petya',
+//         last_name: '',
+//         nick_name: 'Sizo',
+//         phone: 09722122,
+//         group: [{
+//             name: 'best_friends',
+//             id: 1
+//         }],
+//         actions: [{
+//             name: 'missed call',
+//             value: 3,
+//             id: 1
+//         }]
+//     },
+//     {
+//         id: 5,
+//         first_name: 'Rustem',
+//         last_name: '',
+//         nick_name: 'Box',
+//         phone: 09700000,
+//         group: [{
+//             name: 'other',
+//             id: 3
+//         }],
+//         actions: [{
+//             name: 'missed call',
+//             value: 13,
+//             id: 1
+//         }]
+//     }
+// ];
 
-let newIdFirst = {
-    id: 4,
-    first_name: 'Goga',
-    last_name: 'Dzogoshvily',
-    nick_name: 'Arra',
-    phone: 0975555553,
-    group: [{
-        name: 'Shayrma',
-        id: 3
-    }],
-    actions: [{
-        name: 'missed call',
-        value: 7,
-        id: 1
-    }]
-};
+// let newIdFirst = {
+//     id: 4,
+//     first_name: 'Goga',
+//     last_name: 'Dzogoshvily',
+//     nick_name: 'Arra',
+//     phone: 0975555553,
+//     group: [{
+//         name: 'Shayrma',
+//         id: 3
+//     }],
+//     actions: [{
+//         name: 'missed call',
+//         value: 7,
+//         id: 1
+//     }]
+// };
 
-let newIdSecond = {
-    id: 9,
-    first_name: 'Iliya',
-    last_name: 'Popovich',
-    nick_name: 'Bogatir',
-    phone: 0978899000,
-    group: [{
-        name: 'Ohrana',
-        id: 3
-    }],
-    actions: [{
-        name: 'missed call',
-        value: 40,
-        id: 7
-    }]
-};
-let newIdThird = {
-    id: 8,
-    first_name: 'Ivan',
-    last_name: 'Drago',
-    nick_name: 'Belosnezhka',
-    phone: 0973344876,
-    group: [{
-        name: 'Sport',
-        id: 1
-    }],
-    actions: [{
-        name: 'missed call',
-        value: 33,
-        id: 9
-    }]
-};
+// let newIdSecond = {
+//     id: 9,
+//     first_name: 'Iliya',
+//     last_name: 'Popovich',
+//     nick_name: 'Bogatir',
+//     phone: 0978899000,
+//     group: [{
+//         name: 'Ohrana',
+//         id: 3
+//     }],
+//     actions: [{
+//         name: 'missed call',
+//         value: 40,
+//         id: 7
+//     }]
+// };
+// let newIdThird = {
+//     id: 8,
+//     first_name: 'Ivan',
+//     last_name: 'Drago',
+//     nick_name: 'Belosnezhka',
+//     phone: 0973344876,
+//     group: [{
+//         name: 'Sport',
+//         id: 1
+//     }],
+//     actions: [{
+//         name: 'missed call',
+//         value: 33,
+//         id: 9
+//     }]
+// };
 
 // contactList.push(newIdFirst, newIdSecond, newIdThird);
 
@@ -133,10 +133,50 @@ let newIdThird = {
 // let newArr = sortName.filter((i) => i.last_name !== '' && i.nick_name !== '')
 // console.log(newArr)
 
-console.log(contactList)
+// console.log(contactList)
 
-let searchValue = contactList.find(function(item) {
-    return item.phone === 9700000
-});
+// let searchValue = contactList.find(function(item) {
+//     return item.phone === 9700000
+// });
 
-console.log(searchValue)
+// console.log(searchValue)
+
+
+////////////////////////////////////////DOM DZ////////////////////////////////////////////////////////
+
+
+////////////////////////1/////////////
+// let btn = document.querySelector('.btn');
+
+// let arr = [];
+// btn.addEventListener('click', function(e) {
+//     e.preventDefault();
+//     let val = document.querySelector('.message').value;
+//     arr.push(val)
+//     if (val !== '') {
+//         document.querySelector('.show_display').innerHTML = val;
+//     }
+// });
+// console.log(arr)
+
+
+////////////////////////2/////////////
+let img = document.getElementsByTagName('img')
+console.log(img)
+let images = [
+    './images/1.jpg',
+    './images/2.jpg',
+    './images/3.jpg',
+    './images/4.jpg',
+    './images/5.jpg',
+];
+console.log(images)
+
+
+for (let j = 0; j < img.length; j++) {
+    if (img[j].hasAttribute("src") === false) {
+        for (i = 0; i < images.length; i++) {
+            img[j].setAttribute("src", i)
+        }
+    }
+}
