@@ -211,18 +211,18 @@ console.log(btn2)
 
 
 
-let arrRow = [];
-let arrCol = [];
 
-btn2.addEventListener('click', function(e) {
+let push = btn2.addEventListener('click', function(e) {
     e.preventDefault();
-
-
-    arrRow.push(rows.value)
-
-    arrCol.push(columns.value)
+    let rowsVal = rows.value;
+    let colsVal = columns.value
+    for (let i = 1; i <= rowsVal; i++) {
+        let createTr = document.createElement('tr');
+        table.appendChild(createTr);
+        for (let j = 1; j <= colsVal; j++) {
+            let createTd = document.createElement('td');
+            createTr.appendChild(createTd);
+        }
+    }
 
 });
-
-console.log(arrRow);
-console.log(arrCol)
