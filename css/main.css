@@ -36,11 +36,16 @@ tr {
     background-color: blue;
 }
 
-.userCard {
+#userCard {
     border: 2px solid grey;
     padding: 20px;
 }
 
-.userCard h1 {
+#userCard h1 {
     text-align: center;
+}
+
+.userCardItems {
+    border: 2px solid black;
+    padding: 10px;
 }
