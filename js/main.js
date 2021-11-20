@@ -581,11 +581,17 @@ function cardFunction(cardItem) {
     parent.appendChild(newElem);
     cardItem.map(function(key) {
 
+
         function addVal(item) {
             let addName = document.createElement('h2');
             addName.className = 'userName'
             let addNameStr = newElem.appendChild(addName);
             addNameStr.innerHTML = item;
+        }
+        if (key[0] === 'picture') {
+            let addImg = document.createElement('img')
+            addImg.setAttribute('src', key[1].large);
+            newElem.appendChild(addImg)
         }
         if (key[0] === 'name') { addVal(`Имя : ${key[[1]].first}`), addVal(`Фамилия : ${key[[1]].last}`) };
         if (key[0] === 'nat') { addVal(`Национальность : ${key[1]}`) };
