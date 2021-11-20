@@ -35,3 +35,12 @@ tr {
     width: 100%;
     background-color: blue;
 }
+
+.userCard {
+    border: 2px solid grey;
+    padding: 20px;
+}
+
+.userCard h1 {
+    text-align: center;
+}
