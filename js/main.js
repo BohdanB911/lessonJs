@@ -590,6 +590,7 @@ function cardFunction(cardItem) {
         }
         if (key[0] === 'picture') {
             let addImg = document.createElement('img')
+            addImg.className = 'item_img'
             addImg.setAttribute('src', key[1].large);
             newElem.appendChild(addImg)
         }
