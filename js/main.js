@@ -522,93 +522,90 @@ const results = [{
 ];
 
 
-let userOne = results[0];
-let userTwo = results[1];
-let userThree = results[2];
-let userFour = results[3];
+// let userOne = results[0];
+// let userTwo = results[1];
+// let userThree = results[2];
+// let userFour = results[3];
 
-let usKeysArrOne = Object.entries(userOne);
-let usKeysArrTwo = Object.entries(userTwo);
-let usKeysArrThree = Object.entries(userThree);
-let usKeysArrFour = Object.entries(userFour);
-
-
-
-
+// let usKeysArrOne = Object.entries(userOne);
+// let usKeysArrTwo = Object.entries(userTwo);
+// let usKeysArrThree = Object.entries(userThree);
+// let usKeysArrFour = Object.entries(userFour);
 
 // function cardFunction(cardItem) {
+//     const parent = document.getElementById('userCardWrap');
+//     const newElem = document.createElement('div');
+//     newElem.className = 'userCardItems';
+//     parent.appendChild(newElem);
 //     cardItem.map(function(key) {
-//         if (key[0] === 'name') {
-//             let addName = document.querySelector('.userName');
-//             let addLastName = document.querySelector('.userLastName');
-//             addName.innerHTML = `Имя : ${key[[1]].first}`;
-//             addLastName.innerHTML = `Фамилия : ${key[[1]].last}`;
+
+
+//         function addVal(item) {
+//             let addName = document.createElement('h2');
+//             addName.className = 'userName'
+//             let addNameStr = newElem.appendChild(addName);
+//             addNameStr.innerHTML = item;
 //         }
-
-//         if (key[0] === 'nat') { document.querySelector('.userNation').innerHTML = `Национальность : ${key[1]}` };
-//         if (key[0] === 'gender') { document.querySelector('.userGendler').innerHTML = `Пол : ${key[1]}` };
-//         if (key[0] === 'email') { document.querySelector('.userMail').innerHTML = `Электронная почта : ${key[1]}` };
-//         if (key[0] === 'phone') { document.querySelector('.userPhone').innerHTML = `Контактный телефон : ${key[1]}` };
+//         if (key[0] === 'picture') {
+//             let addImg = document.createElement('img')
+//             addImg.className = 'item_img'
+//             addImg.setAttribute('src', key[1].large);
+//             newElem.appendChild(addImg)
+//         }
+//         if (key[0] === 'name') { addVal(`Имя : ${key[[1]].first}`), addVal(`Фамилия : ${key[[1]].last}`) };
+//         if (key[0] === 'nat') { addVal(`Национальность : ${key[1]}`) };
+//         if (key[0] === 'gender') { addVal(`Пол : ${key[1]}`) };
+//         if (key[0] === 'email') { addVal(`Электронная почта : ${key[1]}`) };
+//         if (key[0] === 'phone') { addVal(`Контактный телефон : ${key[1]}`) };
 //         if (key[0] === 'location') {
-
-//             let addKeyStr = document.querySelector('.userStr');
-//             let addKeyNum = document.querySelector('.userStrNum');
-//             let addKeyCity = document.querySelector('.userStrCity');
-
-//             addKeyStr.innerHTML = `Улица : ${key[[1]].street.name}`;
-//             addKeyNum.innerHTML = `Номер улицы  : ${key[[1]].street.number}`
-//             addKeyCity.innerHTML = `Город  : ${key[[1]].city}`
+//             addVal(`Улица : ${key[[1]].street.name}`);
+//             addVal(`Номер улицы  : ${key[[1]].street.number}`);
+//             addVal(`Город  : ${key[[1]].city}`);
 //         };
 //     })
 // }
 
 
+// cardFunction(usKeysArrOne)
+// cardFunction(usKeysArrTwo)
+// cardFunction(usKeysArrThree)
+// cardFunction(usKeysArrFour)
 
 
+const btns = document.querySelectorAll('.tabs_btns-item');
+const tabContent = document.querySelectorAll('.tabs_content-item');
 
 
+console.log(tabContent);
+console.log(btns);
+
+btns.forEach(function(elem) {
+    elem.addEventListener('click', activeTab)
+});
 
 
+function activeTab() {
 
+    btns.forEach(function(act) {
+        act.classList.remove('active');
+    });
 
+    this.classList.add('active');
+    let tabVal = this.getAttribute('data-tab');
+    console.log(tabVal);
 
-
-
-function cardFunction(cardItem) {
-    const parent = document.getElementById('userCardWrap');
-    const newElem = document.createElement('div');
-    newElem.className = 'userCardItems';
-    parent.appendChild(newElem);
-    cardItem.map(function(key) {
-
-
-        function addVal(item) {
-            let addName = document.createElement('h2');
-            addName.className = 'userName'
-            let addNameStr = newElem.appendChild(addName);
-            addNameStr.innerHTML = item;
-        }
-        if (key[0] === 'picture') {
-            let addImg = document.createElement('img')
-            addImg.className = 'item_img'
-            addImg.setAttribute('src', key[1].large);
-            newElem.appendChild(addImg)
-        }
-        if (key[0] === 'name') { addVal(`Имя : ${key[[1]].first}`), addVal(`Фамилия : ${key[[1]].last}`) };
-        if (key[0] === 'nat') { addVal(`Национальность : ${key[1]}`) };
-        if (key[0] === 'gender') { addVal(`Пол : ${key[1]}`) };
-        if (key[0] === 'email') { addVal(`Электронная почта : ${key[1]}`) };
-        if (key[0] === 'phone') { addVal(`Контактный телефон : ${key[1]}`) };
-        if (key[0] === 'location') {
-            addVal(`Улица : ${key[[1]].street.name}`);
-            addVal(`Номер улицы  : ${key[[1]].street.number}`);
-            addVal(`Город  : ${key[[1]].city}`);
-        };
-    })
+    activeContent(tabVal)
 }
 
 
-cardFunction(usKeysArrOne)
-cardFunction(usKeysArrTwo)
-cardFunction(usKeysArrThree)
-cardFunction(usKeysArrFour)
+
+function activeContent(tabValue) {
+    tabContent.forEach(function(content) {
+        console.log(content)
+        if (content.classList.contains(tabValue)) {
+            content.classList.add('active')
+        } else {
+            content.classList.remove('active')
+        }
+    });
+}

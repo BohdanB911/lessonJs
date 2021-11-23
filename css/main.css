@@ -57,3 +57,52 @@ tr {
     right: 30px;
     top: 30px;
 }
+
+.tab_wrap {
+    border: 1px solid wheat;
+    max-width: 800px;
+    height: 400px;
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 20px;
+    background-color: rgb(91, 91, 155);
+    padding: 10px;
+}
+
+.tabs_btns {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 100px;
+}
+
+.tabs_btns-item {
+    border-radius: 20px;
+    border: 1px solid white;
+    width: 100%;
+    text-align: center;
+    margin: 0 5px;
+}
+
+.btns_item-text {
+    font-size: 20px;
+    color: white;
+    line-height: 25px;
+}
+
+.active {
+    background-color: violet;
+}
+
+.tabs_content-item {
+    display: none;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.tabs_content-item.active {
+    display: block;
+}
