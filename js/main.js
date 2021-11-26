@@ -1,4 +1,3 @@
-// Sam Hall, [04.11.2021 13:12]
 // Задачка, перебрать массив и изменить в нем данные, результат вывести в консольку
 // Исходный массив:
 // [123, 'voda', ['q', 'w', 'e' ], { a: 'b', v: 'qwe', c: 123} ]
@@ -6,226 +5,226 @@
 // [1234, 'pivo', ['q', 'w', 'e', 'r'], {a: 'b', v: 'qwe', c: 123}]
 
 
-// let parentArr = [123, 'voda', ['q', 'w', 'e'], { a: 'b', v: 'qwe', c: 123 }];
+let parentArr = [123, 'voda', ['q', 'w', 'e'], { a: 'b', v: 'qwe', c: 123 }];
 
-// for (let i = 0; i < parentArr.length; i++) {
+for (let i = 0; i < parentArr.length; i++) {
 
-//     if (parentArr[i] === 123) {
-//         parentArr.splice(i, 1, 1234)
-//     };
-//     if (parentArr[i] === 'voda') {
-//         parentArr.splice(i, 1, 'pivo')
-//     };
-//     if (Array.isArray(parentArr[i])) {
-//         parentArr[[i]].splice(parentArr[[i].length - 1], 0, 'r');
-//     };
+    if (parentArr[i] === 123) {
+        parentArr.splice(i, 1, 1234)
+    };
+    if (parentArr[i] === 'voda') {
+        parentArr.splice(i, 1, 'pivo')
+    };
+    if (Array.isArray(parentArr[i])) {
+        parentArr[[i]].splice(parentArr[[i].length - 1], 0, 'r');
+    };
 
-// }
+}
 
-// console.log(parentArr)
+console.log(parentArr)
 
 /////////////////////////////////////////////////////// DZ///////////////////////////////////////////////
 
-// const contactList = [{
-//         id: 2,
-//         first_name: 'Vasya',
-//         last_name: 'Petrov',
-//         nick_name: '',
-//         phone: 093945394,
-//         group: [{
-//             name: 'friends',
-//             id: 2
-//         }],
-//         actions: null
-//     },
-//     {
-//         id: 1,
-//         first_name: 'Petya',
-//         last_name: '',
-//         nick_name: 'Sizo',
-//         phone: 09722122,
-//         group: [{
-//             name: 'best_friends',
-//             id: 1
-//         }],
-//         actions: [{
-//             name: 'missed call',
-//             value: 3,
-//             id: 1
-//         }]
-//     },
-//     {
-//         id: 5,
-//         first_name: 'Rustem',
-//         last_name: '',
-//         nick_name: 'Box',
-//         phone: 09700000,
-//         group: [{
-//             name: 'other',
-//             id: 3
-//         }],
-//         actions: [{
-//             name: 'missed call',
-//             value: 13,
-//             id: 1
-//         }]
-//     }
-// ];
+const contactList = [{
+        id: 2,
+        first_name: 'Vasya',
+        last_name: 'Petrov',
+        nick_name: '',
+        phone: 093945394,
+        group: [{
+            name: 'friends',
+            id: 2
+        }],
+        actions: null
+    },
+    {
+        id: 1,
+        first_name: 'Petya',
+        last_name: '',
+        nick_name: 'Sizo',
+        phone: 09722122,
+        group: [{
+            name: 'best_friends',
+            id: 1
+        }],
+        actions: [{
+            name: 'missed call',
+            value: 3,
+            id: 1
+        }]
+    },
+    {
+        id: 5,
+        first_name: 'Rustem',
+        last_name: '',
+        nick_name: 'Box',
+        phone: 09700000,
+        group: [{
+            name: 'other',
+            id: 3
+        }],
+        actions: [{
+            name: 'missed call',
+            value: 13,
+            id: 1
+        }]
+    }
+];
 
-// let newIdFirst = {
-//     id: 4,
-//     first_name: 'Goga',
-//     last_name: 'Dzogoshvily',
-//     nick_name: 'Arra',
-//     phone: 0975555553,
-//     group: [{
-//         name: 'Shayrma',
-//         id: 3
-//     }],
-//     actions: [{
-//         name: 'missed call',
-//         value: 7,
-//         id: 1
-//     }]
-// };
+let newIdFirst = {
+    id: 4,
+    first_name: 'Goga',
+    last_name: 'Dzogoshvily',
+    nick_name: 'Arra',
+    phone: 0975555553,
+    group: [{
+        name: 'Shayrma',
+        id: 3
+    }],
+    actions: [{
+        name: 'missed call',
+        value: 7,
+        id: 1
+    }]
+};
 
-// let newIdSecond = {
-//     id: 9,
-//     first_name: 'Iliya',
-//     last_name: 'Popovich',
-//     nick_name: 'Bogatir',
-//     phone: 0978899000,
-//     group: [{
-//         name: 'Ohrana',
-//         id: 3
-//     }],
-//     actions: [{
-//         name: 'missed call',
-//         value: 40,
-//         id: 7
-//     }]
-// };
-// let newIdThird = {
-//     id: 8,
-//     first_name: 'Ivan',
-//     last_name: 'Drago',
-//     nick_name: 'Belosnezhka',
-//     phone: 0973344876,
-//     group: [{
-//         name: 'Sport',
-//         id: 1
-//     }],
-//     actions: [{
-//         name: 'missed call',
-//         value: 33,
-//         id: 9
-//     }]
-// };
+let newIdSecond = {
+    id: 9,
+    first_name: 'Iliya',
+    last_name: 'Popovich',
+    nick_name: 'Bogatir',
+    phone: 0978899000,
+    group: [{
+        name: 'Ohrana',
+        id: 3
+    }],
+    actions: [{
+        name: 'missed call',
+        value: 40,
+        id: 7
+    }]
+};
+let newIdThird = {
+    id: 8,
+    first_name: 'Ivan',
+    last_name: 'Drago',
+    nick_name: 'Belosnezhka',
+    phone: 0973344876,
+    group: [{
+        name: 'Sport',
+        id: 1
+    }],
+    actions: [{
+        name: 'missed call',
+        value: 33,
+        id: 9
+    }]
+};
 
-// contactList.push(newIdFirst, newIdSecond, newIdThird);
+contactList.push(newIdFirst, newIdSecond, newIdThird);
 
-// const sortName = contactList.sort((a, b) => {
-//     if (a.first_name < b.first_name) { return -1; }
-//     if (a.first_name > b.first_name) { return 1; }
-//     return 0;
-// });
+const sortName = contactList.sort((a, b) => {
+    if (a.first_name < b.first_name) { return -1; }
+    if (a.first_name > b.first_name) { return 1; }
+    return 0;
+});
 
-// let newArr = sortName.filter((i) => i.last_name !== '' && i.nick_name !== '')
-// console.log(newArr)
+let newArr = sortName.filter((i) => i.last_name !== '' && i.nick_name !== '')
+console.log(newArr)
 
-// console.log(contactList)
+console.log(contactList)
 
-// let searchValue = contactList.find(function(item) {
-//     return item.phone === 9700000
-// });
+let searchValue = contactList.find(function(item) {
+    return item.phone === 9700000
+});
 
-// console.log(searchValue)
+console.log(searchValue)
 
 
 ////////////////////////////////////////DOM DZ////////////////////////////////////////////////////////
 
 
 ////////////////////////1/////////////
-// let btn = document.querySelector('.btn');
+let btn = document.querySelector('.btn');
 
-// let arr = [];
-// btn.addEventListener('click', function(e) {
-//     e.preventDefault();
-//     let val = document.querySelector('.message').value;
-//     arr.push(val)
-//     if (val !== '') {
-//         document.querySelector('.show_display').innerHTML = val;
-//     }
-// });
-// console.log(arr)
+let arr = [];
+btn.addEventListener('click', function(e) {
+    e.preventDefault();
+    let val = document.querySelector('.message').value;
+    arr.push(val)
+    if (val !== '') {
+        document.querySelector('.show_display').innerHTML = val;
+    }
+});
+console.log(arr)
 
 
 ////////////////////////2/////////////
-// let images = [
-//     './images/1.jpg',
-//     './images/2.jpg',
-//     './images/3.jpg',
-//     './images/4.jpg',
-//     './images/5.jpg',
-// ];
+let images = [
+    './images/1.jpg',
+    './images/2.jpg',
+    './images/3.jpg',
+    './images/4.jpg',
+    './images/5.jpg',
+];
 
-// images.forEach(src => {
-//     const img = document.createElement('img');
-//     img.src = src;
-//     console.log(src)
-//     const div = document.createElement('div');
-//     div.className = 'img_item-wrap';
-//     div.append(img);
+images.forEach(src => {
+    const img = document.createElement('img');
+    img.src = src;
+    console.log(src)
+    const div = document.createElement('div');
+    div.className = 'img_item-wrap';
+    div.append(img);
 
-//     document.querySelector('#img_wrap').append(div);
-// });
+    document.querySelector('#img_wrap').append(div);
+});
 
 
 ///////////////////////////////3//////////////
-// let selVal = document.querySelector('select');
-// // let sel = document.querySelector('select').options;
-// let testBlock = document.getElementsByClassName('divTest')[0];
-// selVal.selected = testBlock.style.backgroundColor = 'red';
+let selVal = document.querySelector('select');
+// let sel = document.querySelector('select').options;
+let testBlock = document.getElementsByClassName('divTest')[0];
+selVal.selected = testBlock.style.backgroundColor = 'red';
 
-// selVal.addEventListener('change', function() {
-//     if (selVal.value === 'red') testBlock.style.backgroundColor = 'red';
-//     if (selVal.value === 'blue') testBlock.style.backgroundColor = 'blue';
-//     if (selVal.value === 'green') testBlock.style.backgroundColor = 'green';
-//     if (selVal.value === 'yelow') testBlock.style.backgroundColor = 'yellow';
+selVal.addEventListener('change', function() {
+    if (selVal.value === 'red') testBlock.style.backgroundColor = 'red';
+    if (selVal.value === 'blue') testBlock.style.backgroundColor = 'blue';
+    if (selVal.value === 'green') testBlock.style.backgroundColor = 'green';
+    if (selVal.value === 'yelow') testBlock.style.backgroundColor = 'yellow';
 
-// })
+})
 
 // /////////////////////////4//////////////////////
 
-// const form = document.getElementById('form');
-// console.log(form)
-// const rows = document.getElementById('row');
-// console.log(rows)
-// const columns = document.getElementById('column');
-// console.log(columns)
-// const table = document.getElementById('table');
-// console.log(table)
-// let btn2 = document.querySelector('.btn2');
-// console.log(btn2)
+const form = document.getElementById('form');
+console.log(form)
+const rows = document.getElementById('row');
+console.log(rows)
+const columns = document.getElementById('column');
+console.log(columns)
+const table = document.getElementById('table');
+console.log(table)
+let btn2 = document.querySelector('.btn2');
+console.log(btn2)
 
 
 
 
 
-// let push = btn2.addEventListener('click', function(e) {
-//     e.preventDefault();
-//     let rowsVal = rows.value;
-//     let colsVal = columns.value
-//     for (let i = 1; i <= rowsVal; i++) {
-//         let createTr = document.createElement('tr');
-//         table.appendChild(createTr);
-//         for (let j = 1; j <= colsVal; j++) {
-//             let createTd = document.createElement('td');
-//             createTr.appendChild(createTd);
-//         }
-//     }
+let push = btn2.addEventListener('click', function(e) {
+    e.preventDefault();
+    let rowsVal = rows.value;
+    let colsVal = columns.value
+    for (let i = 1; i <= rowsVal; i++) {
+        let createTr = document.createElement('tr');
+        table.appendChild(createTr);
+        for (let j = 1; j <= colsVal; j++) {
+            let createTd = document.createElement('td');
+            createTr.appendChild(createTd);
+        }
+    }
 
-// });
+});
 
 
 /////////////////////////////////DZ DOM 2/////////////////////////////////////////////////
@@ -522,54 +521,54 @@ const results = [{
 ];
 
 
-// let userOne = results[0];
-// let userTwo = results[1];
-// let userThree = results[2];
-// let userFour = results[3];
+let userOne = results[0];
+let userTwo = results[1];
+let userThree = results[2];
+let userFour = results[3];
 
-// let usKeysArrOne = Object.entries(userOne);
-// let usKeysArrTwo = Object.entries(userTwo);
-// let usKeysArrThree = Object.entries(userThree);
-// let usKeysArrFour = Object.entries(userFour);
+let usKeysArrOne = Object.entries(userOne);
+let usKeysArrTwo = Object.entries(userTwo);
+let usKeysArrThree = Object.entries(userThree);
+let usKeysArrFour = Object.entries(userFour);
 
-// function cardFunction(cardItem) {
-//     const parent = document.getElementById('userCardWrap');
-//     const newElem = document.createElement('div');
-//     newElem.className = 'userCardItems';
-//     parent.appendChild(newElem);
-//     cardItem.map(function(key) {
-
-
-//         function addVal(item) {
-//             let addName = document.createElement('h2');
-//             addName.className = 'userName'
-//             let addNameStr = newElem.appendChild(addName);
-//             addNameStr.innerHTML = item;
-//         }
-//         if (key[0] === 'picture') {
-//             let addImg = document.createElement('img')
-//             addImg.className = 'item_img'
-//             addImg.setAttribute('src', key[1].large);
-//             newElem.appendChild(addImg)
-//         }
-//         if (key[0] === 'name') { addVal(`Имя : ${key[[1]].first}`), addVal(`Фамилия : ${key[[1]].last}`) };
-//         if (key[0] === 'nat') { addVal(`Национальность : ${key[1]}`) };
-//         if (key[0] === 'gender') { addVal(`Пол : ${key[1]}`) };
-//         if (key[0] === 'email') { addVal(`Электронная почта : ${key[1]}`) };
-//         if (key[0] === 'phone') { addVal(`Контактный телефон : ${key[1]}`) };
-//         if (key[0] === 'location') {
-//             addVal(`Улица : ${key[[1]].street.name}`);
-//             addVal(`Номер улицы  : ${key[[1]].street.number}`);
-//             addVal(`Город  : ${key[[1]].city}`);
-//         };
-//     })
-// }
+function cardFunction(cardItem) {
+    const parent = document.getElementById('userCardWrap');
+    const newElem = document.createElement('div');
+    newElem.className = 'userCardItems';
+    parent.appendChild(newElem);
+    cardItem.map(function(key) {
 
 
-// cardFunction(usKeysArrOne)
-// cardFunction(usKeysArrTwo)
-// cardFunction(usKeysArrThree)
-// cardFunction(usKeysArrFour)
+        function addVal(item) {
+            let addName = document.createElement('h2');
+            addName.className = 'userName'
+            let addNameStr = newElem.appendChild(addName);
+            addNameStr.innerHTML = item;
+        }
+        if (key[0] === 'picture') {
+            let addImg = document.createElement('img')
+            addImg.className = 'item_img'
+            addImg.setAttribute('src', key[1].large);
+            newElem.appendChild(addImg)
+        }
+        if (key[0] === 'name') { addVal(`Имя : ${key[[1]].first}`), addVal(`Фамилия : ${key[[1]].last}`) };
+        if (key[0] === 'nat') { addVal(`Национальность : ${key[1]}`) };
+        if (key[0] === 'gender') { addVal(`Пол : ${key[1]}`) };
+        if (key[0] === 'email') { addVal(`Электронная почта : ${key[1]}`) };
+        if (key[0] === 'phone') { addVal(`Контактный телефон : ${key[1]}`) };
+        if (key[0] === 'location') {
+            addVal(`Улица : ${key[[1]].street.name}`);
+            addVal(`Номер улицы  : ${key[[1]].street.number}`);
+            addVal(`Город  : ${key[[1]].city}`);
+        };
+    })
+}
+
+
+cardFunction(usKeysArrOne)
+cardFunction(usKeysArrTwo)
+cardFunction(usKeysArrThree)
+cardFunction(usKeysArrFour)
 
 
 const btns = document.querySelectorAll('.tabs_btns-item');
