@@ -615,13 +615,9 @@ box.addEventListener('click', function() {
             return response.json()
         })
         .then((data) => {
-            console.log(data)
 
-            for (let [key, value] of Object.entries(data)) {
-
-                box.style.backgroundColor = value;
-                console.log(key, value)
-            }
+            let val = Object.values(data)
+            box.style.backgroundColor = val[2]
 
         });
 
