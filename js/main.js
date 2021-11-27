@@ -618,11 +618,9 @@ box.addEventListener('click', function() {
             console.log(data)
 
             for (let [key, value] of Object.entries(data)) {
-                if (key === 'color_name') {
-                    box.style.backgroundColor = value;
-                }
-                console.log(key, value)
 
+                box.style.backgroundColor = value;
+                console.log(key, value)
             }
 
         });
