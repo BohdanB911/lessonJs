@@ -574,10 +574,6 @@ cardFunction(usKeysArrFour)
 const btns = document.querySelectorAll('.tabs_btns-item');
 const tabContent = document.querySelectorAll('.tabs_content-item');
 
-
-console.log(tabContent);
-console.log(btns);
-
 btns.forEach(function(elem) {
     elem.addEventListener('click', activeTab)
 });
@@ -596,8 +592,6 @@ function activeTab() {
     activeContent(tabVal)
 }
 
-
-
 function activeContent(tabValue) {
     tabContent.forEach(function(content) {
         console.log(content)
@@ -608,3 +602,30 @@ function activeContent(tabValue) {
         }
     });
 }
+
+
+
+/////////////////////////////////dz API///////////////////////////////
+let box = document.querySelector('.an_color-wrap');
+
+box.addEventListener('click', function() {
+
+    fetch(`https://random-data-api.com/api/color/random_color`)
+        .then((response) => {
+            return response.json()
+        })
+        .then((data) => {
+            console.log(data)
+
+            for (let [key, value] of Object.entries(data)) {
+                if (key === 'color_name') {
+                    box.style.backgroundColor = value;
+                }
+                console.log(key, value)
+
+            }
+
+        });
+
+
+})

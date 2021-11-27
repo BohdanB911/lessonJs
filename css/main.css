@@ -106,3 +106,10 @@ tr {
 .tabs_content-item.active {
     display: block;
 }
+
+.an_color-wrap {
+    width: 300px;
+    height: 300px;
+    border: 2px solid black;
+    margin: 50px auto;
+}
