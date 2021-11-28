@@ -113,3 +113,20 @@ tr {
     border: 2px solid black;
     margin: 50px auto;
 }
+
+.choice_wrap {
+    display: flex;
+    justify-content: space-around;
+}
+
+.choice_user {
+    width: 600px;
+    min-height: 500px;
+    border: 1px solid black;
+    padding: 20px;
+}
+
+.choice {
+    width: 100px;
+    height: 20px;
+}

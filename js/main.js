@@ -620,6 +620,61 @@ box.addEventListener('click', function() {
             box.style.backgroundColor = val[2]
 
         });
+});
+///////////////ZADACHA 1
+fetch(`https://random-data-api.com/api/users/random_user?size=10`)
+    .then((response) => {
+        return response.json()
+    })
+    .then((data) => {
+        console.log(data)
+        let sel = document.querySelector('.choice');
+
+        for (let i = 0; i < sel.length; i++) {
+            console.log(`внешний цикл ${i}`)
+
+            for (let j = 0; j < i; j++) {
+                // console.log(data[j].first_name)
+                sel[i].innerHTML = data[j].first_name
+            }
+        };
+
+        function addUs(user) {
+
+            createAll(`Имя : ${user.first_name}`);
+            createAll(`Фамилия : ${user.last_name}`)
+            createAll(`Пол  : ${user.gender}`);
+            createAll(`Улица : ${user.address.street_name}`);
+            createAll(`Штат  : ${user.address.state}`);
+            createAll(`Город  : ${user.address.city}`);
+            createAll(`Страна  : ${user.address.country}`);
+            createAll(`Номер телефона  : ${user.phone_number}`);
+            createAll(`Ник  : ${user.username}`);
+            createAll(`Почта  : ${user.email}`);
+
+        }
 
 
-})
+        function createAll(item2) {
+            let wrapper = document.querySelector('.choice_user')
+            console.log(wrapper)
+            let addName = document.createElement('h2');
+            let addNameStr = wrapper.appendChild(addName);
+            addNameStr.innerHTML = item2;
+        }
+
+
+        sel.addEventListener('change', function() {
+
+            document.querySelector('.choice_user').innerHTML = "";
+
+            for (let i = 0; i < data.length; i++) {
+                console.log(data[i])
+                console.log(sel.value)
+                if (i === Number(sel.value)) {
+                    addUs(data[i])
+                }
+            }
+        })
+
+    });
