@@ -27,6 +27,10 @@ function clear() {
     simbool = '';
 };
 
+
+
+
+
 btns.addEventListener('click', (e) => {
     if (!e.target.classList.contains('btn')) return;
     if (e.target.getAttribute('data-value') === 'c') return;
@@ -37,20 +41,22 @@ btns.addEventListener('click', (e) => {
 
     equalRez(Number(firstFilling), simbool, Number(secondFilling))
 
-    if (key != '+' && key != '-' && key != '*' && key != '/') {
+    if (key !== '+' && key !== '-' && key !== '*' && key !== '/') {
 
-        if (simbool === '') {
+        if (simbool === '' && key !== '=') {
             firstFilling += key;
             console.log(firstFilling);
             rezWindow.textContent = firstFilling;
 
         }
-        if (firstFilling != '' && simbool.length != 0) {
+        if (firstFilling != '' && simbool.length != 0 && key !== '=') {
+
             secondFilling += key;
             console.log(secondFilling);
             rezWindow.textContent = secondFilling;
+
         };
-        // return
+
     }
 
     if (key === '+' || key === '-' || key === '*' || key === '/') {
@@ -63,15 +69,22 @@ btns.addEventListener('click', (e) => {
 
         }
     }
+    if (key === '=') {
+        firstFilling = '';
+        secondFilling = '';
+        simbool = '';
+    }
+
 
 });
 
-equals.addEventListener('click', equalRez);
+
 
 
 
 function equalRez(a, value, b) {
     let rezult;
+    console.log(rezult)
     if (value === '*') {
         rezult = mult(a, b)
     };

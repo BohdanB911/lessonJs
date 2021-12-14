@@ -81,3 +81,7 @@ body {
     color: white;
     font-weight: bold;
 }
+
+.equals_wrap {
+    cursor: pointer;
+}
