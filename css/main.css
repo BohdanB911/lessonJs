@@ -85,3 +85,13 @@ body {
 .equals_wrap {
     cursor: pointer;
 }
+
+
+/* //////////////////////////////////////////// */
+
+#posts>div {
+    border: 1px solid black;
+    width: 400px;
+    margin-top: 30px;
+    padding: 30px;
+}
