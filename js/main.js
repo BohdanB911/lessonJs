@@ -11,6 +11,7 @@ function allAround() {
         // запрашиваем JSON постов
         const posts_response = await fetch(`${URI}` + '/wp-json/wp/v2/posts' + `?per_page=${PER_PAGE}` + `&page=${page}`); // http://imtles.noodless.co.ua/wp-json/wp/v2/posts?per_page=2&page=1
         const posts_data = await posts_response.json();
+
         async function getImage(id) {
             const img_response = await fetch(`${URI}` + '/wp-json/wp/v2/media/' + `${id}`); // http://imtles.noodless.co.ua/wp-json/wp/v2/media/7
             const img_data = await img_response.json();
@@ -57,72 +58,135 @@ function allAround() {
 
             return postsDiv;
         });
-        console.log(postsDiv)
+
+
         const postArr = document.getElementsByClassName('post_item');
-        console.log(postArr);
         postArr[0].classList.add('active');
-        for (let i = 0; i < postArr.length; i++) {
-            console.log(postArr[i])
-        }
+
+        const dots = document.getElementsByClassName('dots_item');
+        dots[0].classList.add('active_dot');
+        // console.log(dots)
 
 
+        setTimeout(() => {
 
-        // const a = document.querySelectorAll('.post_item');
-        // console.log(a)
+            let newArr = Array.from(postArr);
+            console.log(newArr);
+            let allWcount = 0;
+            newArr.forEach(item => {
+                allWcount += item.offsetWidth;
+                // console.log(item);
+            });
+            // console.log(allWcount);
 
-        const prevBtn = document.querySelector('.prev_arrow');
-        const nextBtn = document.querySelector('.next_arrow');
+
+            const postsTrue = document.querySelector('.all_posts');
+            // console.log(postsTrue.)
+            const prevBtn = document.querySelector('.prev_arrow');
+
+            const nextBtn = document.querySelector('.next_arrow');
+            let countPrev = 0;
+            let countNext = 0;
+            let trueStyle = getComputedStyle(postsTrue).left;
+            if (trueStyle === '0px') {
+                nextBtn.style.pointerEvents = 'none';
 
 
-        prevBtn.addEventListener('click', function() {
-
-            const posts = document.querySelector('.all_posts')
-            const currEl = document.querySelector('.active');
-
-            if (!posts.firstElementChild.classList.contains('active')) {
-                currEl.previousElementSibling.classList.add('active');
-                currEl.previousElementSibling.classList.add('order');
-
-                currEl.classList.remove('active');
-                currEl.classList.remove('order');
-            }
-            if (posts.firstElementChild.getAttribute('data-slide') === currEl.getAttribute('data-slide')) {
-                posts.lastElementChild.classList.add('active');
-                posts.lastElementChild.classList.add('order');
-
-                posts.firstElementChild.classList.remove('active');
-                posts.firstElementChild.classList.remove('order')
-            }
-
-        });
-
-        nextBtn.addEventListener('click', function() {
-
-            const posts = document.querySelector('.all_posts')
-            const currEl = document.querySelector('.active');
-
-            if (!posts.lastElementChild.classList.contains('active')) {
-                currEl.nextElementSibling.classList.add('active');
-                currEl.nextElementSibling.classList.add('order');
-
-                currEl.classList.remove('active');
-                currEl.classList.remove('order');
             }
 
-            if (posts.lastElementChild.getAttribute('data-slide') === currEl.getAttribute('data-slide')) {
-                posts.firstElementChild.classList.add('active');
-                posts.firstElementChild.classList.add('order');
+            prevBtn.addEventListener('click', function() {
+                nextBtn.style.pointerEvents = 'auto';
+                const dots = document.querySelector('.dots');
+                const posts = document.querySelector('.all_posts')
+                const currEl = document.querySelector('.active');
+                const currElDots = document.querySelector('.active_dot');
+                // 1!
+                if (!posts.lastElementChild.classList.contains('active')) {
+                    currEl.nextElementSibling.classList.add('active');
+                    currEl.classList.remove('active');
+                };
+                // 1!
+                if (!dots.lastElementChild.classList.contains('active_dot')) {
+                    currElDots.nextElementSibling.classList.add('active_dot');
+                    currElDots.classList.remove('active_dot');
+                }
+                // 2
+                if (posts.lastElementChild.getAttribute('data-slide') === currEl.getAttribute('data-slide')) {
+                    posts.firstElementChild.classList.add('active');
+                    posts.lastElementChild.classList.remove('active');
+                };
+                if (dots.lastElementChild.getAttribute('data-dot') === currElDots.getAttribute('data-dot')) {
+                    dots.firstElementChild.classList.add('active_dot');
+                    dots.lastElementChild.classList.remove('active_dot');
+                }
+                const clickPostTrue = document.querySelector('.all_posts')
+                let clickTrueStyle = getComputedStyle(clickPostTrue).left;
 
-                posts.lastElementChild.classList.remove('active');
-                posts.lastElementChild.classList.remove('order');
-            }
 
-        });
+                countNext += currEl.offsetWidth;
+                countPrev += currEl.offsetWidth;
+                posts.style.left = -countPrev + 'px';
+
+                if (countPrev >= allWcount - currEl.offsetWidth) {
+                    prevBtn.style.pointerEvents = 'none';
+
+                }
+
+            });
+
+            nextBtn.addEventListener('click', function() {
+                prevBtn.style.pointerEvents = 'auto';
+                const posts = document.querySelector('.all_posts');
+                const dots = document.querySelector('.dots');
+                console.log(posts)
+                const currEl = document.querySelector('.active');
+                const currElDots = document.querySelector('.active_dot');
+                // 1
+                if (!posts.firstElementChild.classList.contains('active')) {
+                    currEl.previousElementSibling.classList.add('active');
+                    currEl.classList.remove('active');
+                }
+                // 1
+                if (!dots.firstElementChild.classList.contains('active_dot')) {
+                    currElDots.previousElementSibling.classList.add('active_dot');
+                    currElDots.classList.remove('active_dot');
+                }
+
+                // 2
+                if (posts.firstElementChild.getAttribute('data-slide') === currEl.getAttribute('data-slide')) {
+                    posts.lastElementChild.classList.add('active');
+                    posts.firstElementChild.classList.remove('active');
+                };
+                // 2
+                if (dots.firstElementChild.getAttribute('data-dot') === currEl.getAttribute('data-dot')) {
+                    dots.lastElementChild.classList.add('active_dot');
+                    dots.firstElementChild.classList.remove('active_dot');
+                };
+
+                const clickPostTrue = document.querySelector('.all_posts')
+                let clickTrueStyle = getComputedStyle(clickPostTrue).left;
+
+
+
+
+                countPrev -= currEl.offsetWidth;
+                countNext += currEl.offsetWidth;
+                posts.style.left = Number(clickTrueStyle.slice(0, -2)) + currEl.offsetWidth + 'px';
+                console.log(Number(clickTrueStyle.slice(0, -2)))
+                if (Number(clickTrueStyle.slice(0, -2)) + currEl.offsetWidth === Number(trueStyle.slice(0, -2))) {
+                    nextBtn.style.pointerEvents = 'none';
+                    countNext = 0;
+                    console.log('ok')
+                }
+
+            });
+        }, 700);
 
 
         return posts_data;
     }
     getPosts();
+
 }
 
 
@@ -152,9 +216,9 @@ async function getPost(id) {
         return img_data;
     }
     const image = post_data.featured_media ? await getImage(post_data.featured_media) : placeholder;
-    const thisP = document.getElementById('posts');
+    const thisP = document.getElementById('pop_up-wrap');
+    thisP.style.display = 'flex';
 
-    thisP.innerHTML = '';
     const postImage = document.createElement('img');
     postImage.setAttribute('src', `${image.media_details.sizes.thumbnail.source_url}`);
     postImage.setAttribute('class', `post_img`);
@@ -177,6 +241,9 @@ async function getPost(id) {
     post.appendChild(postTitle);
     post.appendChild(postText);
     post.appendChild(postDate);
-    close.addEventListener('click', allAround)
-        // console.log(post_data)
+    close.addEventListener('click', () => {
+        thisP.innerHTML = '';
+        thisP.style.display = 'none';
+    });
+    // console.log(post_data)
 }
