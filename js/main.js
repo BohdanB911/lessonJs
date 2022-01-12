@@ -3,197 +3,173 @@ const URI = 'http://imtles.noodless.co.ua';
 const PER_PAGE = 5;
 // login: admin
 // pass: itx85A!f^&07SGM!$Z
-function allAround() {
-
-    async function getPosts(page = 1) {
-        const postsDiv = document.getElementById('posts');
-        postsDiv.innerText = '';
-        // запрашиваем JSON постов
-        const posts_response = await fetch(`${URI}` + '/wp-json/wp/v2/posts' + `?per_page=${PER_PAGE}` + `&page=${page}`); // http://imtles.noodless.co.ua/wp-json/wp/v2/posts?per_page=2&page=1
-        const posts_data = await posts_response.json();
-
-        async function getImage(id) {
-            const img_response = await fetch(`${URI}` + '/wp-json/wp/v2/media/' + `${id}`); // http://imtles.noodless.co.ua/wp-json/wp/v2/media/7
-            const img_data = await img_response.json();
-            return img_data;
-        }
 
 
-        posts_data.map(async(postItem, index) => {
-            const placeholder = {
-                'media_details': {
-                    'sizes': {
-                        'thumbnail': {
-                            'source_url': './images/avatar.jpg'
-                        }
+async function getPosts(page = 1) {
+    const postsDiv = document.getElementById('posts');
+    postsDiv.innerText = '';
+    // запрашиваем JSON постов
+    const posts_response = await fetch(`${URI}` + '/wp-json/wp/v2/posts' + `?per_page=${PER_PAGE}` + `&page=${page}`); // http://imtles.noodless.co.ua/wp-json/wp/v2/posts?per_page=2&page=1
+    const posts_data = await posts_response.json();
+
+
+    async function getImage(id) {
+        const img_response = await fetch(`${URI}` + '/wp-json/wp/v2/media/' + `${id}`); // http://imtles.noodless.co.ua/wp-json/wp/v2/media/7
+        const img_data = await img_response.json();
+        return img_data;
+    }
+
+    posts_data.map(async(postItem, index) => {
+        const placeholder = {
+            'media_details': {
+                'sizes': {
+                    'thumbnail': {
+                        'source_url': './images/avatar.jpg'
                     }
                 }
-            };
+            }
+        };
 
-            const image = postItem.featured_media ? await getImage(postItem.featured_media) : placeholder;
-            const post = document.createElement('div');
-            post.setAttribute('class', 'post_item')
-            post.setAttribute('data-slide', index)
-            const postTitle = document.createElement('h2');
-            postTitle.innerHTML = postItem.title.rendered;
-            const postText = document.createElement('p');
-            postText.innerHTML = postItem.content.rendered;
-            const postDate = document.createElement('p');
-            const subStr = postItem.date.substring(0, 9);
-            postDate.innerHTML = subStr;
-            const postImage = document.createElement('img');
-            postImage.setAttribute('src', `${image.media_details.sizes.thumbnail.source_url}`);
-            postImage.setAttribute('class', `post_img`);
-            post.appendChild(postImage);
-            const btns = document.createElement('button');
-            btns.setAttribute('value', postItem.id);
-            btns.setAttribute('class', 'post_btn');
-            btns.setAttribute('onclick', `getPost(${btns.value})`);
-            btns.innerText = 'click here';
-            postsDiv.appendChild(post);
-            post.appendChild(postTitle);
-            post.appendChild(postText);
-            post.appendChild(postDate);
-            post.appendChild(btns)
+        const image = postItem.featured_media ? await getImage(postItem.featured_media) : placeholder;
+        const post = document.createElement('div');
+        post.setAttribute('class', 'post_item')
+        post.setAttribute('data-slide', index)
+        const postTitle = document.createElement('h2');
+        postTitle.innerHTML = postItem.title.rendered;
+        const postText = document.createElement('p');
+        postText.innerHTML = postItem.content.rendered;
+        const postDate = document.createElement('p');
+        const subStr = postItem.date.substring(0, 9);
+        postDate.innerHTML = subStr;
+        const postImage = document.createElement('img');
+        postImage.setAttribute('src', `${image.media_details.sizes.thumbnail.source_url}`);
+        postImage.setAttribute('class', `post_img`);
+        post.appendChild(postImage);
+        const btns = document.createElement('button');
+        btns.setAttribute('value', postItem.id);
+        btns.setAttribute('class', 'post_btn');
+        btns.setAttribute('onclick', `getPost(${btns.value})`);
+        btns.innerText = 'click here';
+        postsDiv.appendChild(post);
+        post.appendChild(postTitle);
+        post.appendChild(postText);
+        post.appendChild(postDate);
+        post.appendChild(btns)
 
-            return postsDiv;
-        });
+        return postsDiv;
+    });
 
-
+    setTimeout(() => {
         const postArr = document.getElementsByClassName('post_item');
-        postArr[0].classList.add('active');
-
         const dots = document.getElementsByClassName('dots_item');
-        dots[0].classList.add('active_dot');
-        // console.log(dots)
 
 
-        setTimeout(() => {
+        postArr[postArr.length - 1].classList.add('active');
 
-            let newArr = Array.from(postArr);
-            console.log(newArr);
-            let allWcount = 0;
-            newArr.forEach(item => {
-                allWcount += item.offsetWidth;
-                // console.log(item);
-            });
-            // console.log(allWcount);
+        let dotsArr = Array.from(dots);
+        dotsArr.reverse();
+        dotsArr[dotsArr.length - 1].classList.add('active_dot');
 
-
-            const postsTrue = document.querySelector('.all_posts');
-            // console.log(postsTrue.)
-            const prevBtn = document.querySelector('.prev_arrow');
-
-            const nextBtn = document.querySelector('.next_arrow');
-            let countPrev = 0;
-            let countNext = 0;
-            let trueStyle = getComputedStyle(postsTrue).left;
-            if (trueStyle === '0px') {
-                nextBtn.style.pointerEvents = 'none';
+        let newArr = Array.from(postArr);
+        let allWcount = 0;
+        newArr.forEach(item => {
+            allWcount += item.offsetWidth;
+        });
+        console.log(allWcount);
 
 
+        const postsTrue = document.querySelector('.all_posts');
+        const prevBtn = document.querySelector('.prev_arrow');
+        const nextBtn = document.querySelector('.next_arrow');
+
+
+
+        postsTrue.style.left = -allWcount + newArr[0].offsetWidth + 'px';
+        let countPrev = 0;
+        prevBtn.addEventListener('click', function() {
+
+            nextBtn.style.pointerEvents = 'auto';
+            const dots = document.querySelector('.dots');
+            const posts = document.querySelector('.all_posts');
+            const currEl = document.querySelector('.active');
+            const currElDots = document.querySelector('.active_dot');
+            let clickTrueStyle = getComputedStyle(posts).left;
+
+            if (!posts.lastElementChild.classList.contains('active')) {
+                currEl.nextElementSibling.classList.add('active');
+                currEl.classList.remove('active');
+            };
+            if (!dots.firstElementChild.classList.contains('active_dot')) {
+                currElDots.previousElementSibling.classList.add('active_dot');
+                currElDots.classList.remove('active_dot');
+            }
+            if (posts.lastElementChild.getAttribute('data-slide') === currEl.getAttribute('data-slide')) {
+                posts.firstElementChild.classList.add('active');
+                posts.lastElementChild.classList.remove('active');
+            };
+            if (dots.firstElementChild.getAttribute('data-dot') === currElDots.getAttribute('data-dot')) {
+                dots.lastElementChild.classList.add('active_dot');
+                dots.firstElementChild.classList.remove('active_dot');
             }
 
-            prevBtn.addEventListener('click', function() {
-                nextBtn.style.pointerEvents = 'auto';
-                const dots = document.querySelector('.dots');
-                const posts = document.querySelector('.all_posts')
-                const currEl = document.querySelector('.active');
-                const currElDots = document.querySelector('.active_dot');
-                // 1!
-                if (!posts.lastElementChild.classList.contains('active')) {
-                    currEl.nextElementSibling.classList.add('active');
-                    currEl.classList.remove('active');
-                };
-                // 1!
-                if (!dots.lastElementChild.classList.contains('active_dot')) {
-                    currElDots.nextElementSibling.classList.add('active_dot');
-                    currElDots.classList.remove('active_dot');
-                }
-                // 2
-                if (posts.lastElementChild.getAttribute('data-slide') === currEl.getAttribute('data-slide')) {
-                    posts.firstElementChild.classList.add('active');
-                    posts.lastElementChild.classList.remove('active');
-                };
-                if (dots.lastElementChild.getAttribute('data-dot') === currElDots.getAttribute('data-dot')) {
-                    dots.firstElementChild.classList.add('active_dot');
-                    dots.lastElementChild.classList.remove('active_dot');
-                }
-                const clickPostTrue = document.querySelector('.all_posts')
-                let clickTrueStyle = getComputedStyle(clickPostTrue).left;
+            countPrev -= currEl.offsetWidth;
+
+            posts.style.left = Number(clickTrueStyle.slice(0, -2)) - currEl.offsetWidth + 'px';
+            if (Math.abs(Number(clickTrueStyle.slice(0, -2)) - currEl.offsetWidth) === allWcount) {
+                postsTrue.style.left = '0px';
+                countPrev = 0;
+            }
+
+        });
+        let countNext = 0;
+        nextBtn.addEventListener('click', function() {
+
+            const posts = document.querySelector('.all_posts');
+            const dots = document.querySelector('.dots');
+            const currEl = document.querySelector('.active');
+            const currElDots = document.querySelector('.active_dot');
+            let clickTrueStyle = getComputedStyle(posts).left;
+
+            if (!posts.firstElementChild.classList.contains('active')) {
+                currEl.previousElementSibling.classList.add('active');
+                currEl.classList.remove('active');
+            };
+            if (!dots.lastElementChild.classList.contains('active_dot')) {
+                currElDots.nextElementSibling.classList.add('active_dot');
+                currElDots.classList.remove('active_dot');
+            }
+            if (posts.firstElementChild.getAttribute('data-slide') === currEl.getAttribute('data-slide')) {
+                posts.lastElementChild.classList.add('active');
+                posts.firstElementChild.classList.remove('active');
+            };
+            if (dots.lastElementChild.getAttribute('data-dot') === currElDots.getAttribute('data-dot')) {
+                dots.firstElementChild.classList.add('active_dot');
+                dots.lastElementChild.classList.remove('active_dot');
+            };
+
+            countNext += currEl.offsetWidth;
+            posts.style.left = Number(clickTrueStyle.slice(0, -2)) + currEl.offsetWidth + 'px';
+            let trueStyle = getComputedStyle(postsTrue).left;
+
+            if (Number(trueStyle.slice(0, -2)) === currEl.offsetWidth) {
+                postsTrue.style.left = -allWcount + newArr[0].offsetWidth + 'px';
+                countNext = 0;
+            }
+        });
+    }, 700);
 
 
-                countNext += currEl.offsetWidth;
-                countPrev += currEl.offsetWidth;
-                posts.style.left = -countPrev + 'px';
-
-                if (countPrev >= allWcount - currEl.offsetWidth) {
-                    prevBtn.style.pointerEvents = 'none';
-
-                }
-
-            });
-
-            nextBtn.addEventListener('click', function() {
-                prevBtn.style.pointerEvents = 'auto';
-                const posts = document.querySelector('.all_posts');
-                const dots = document.querySelector('.dots');
-                console.log(posts)
-                const currEl = document.querySelector('.active');
-                const currElDots = document.querySelector('.active_dot');
-                // 1
-                if (!posts.firstElementChild.classList.contains('active')) {
-                    currEl.previousElementSibling.classList.add('active');
-                    currEl.classList.remove('active');
-                }
-                // 1
-                if (!dots.firstElementChild.classList.contains('active_dot')) {
-                    currElDots.previousElementSibling.classList.add('active_dot');
-                    currElDots.classList.remove('active_dot');
-                }
-
-                // 2
-                if (posts.firstElementChild.getAttribute('data-slide') === currEl.getAttribute('data-slide')) {
-                    posts.lastElementChild.classList.add('active');
-                    posts.firstElementChild.classList.remove('active');
-                };
-                // 2
-                if (dots.firstElementChild.getAttribute('data-dot') === currEl.getAttribute('data-dot')) {
-                    dots.lastElementChild.classList.add('active_dot');
-                    dots.firstElementChild.classList.remove('active_dot');
-                };
-
-                const clickPostTrue = document.querySelector('.all_posts')
-                let clickTrueStyle = getComputedStyle(clickPostTrue).left;
-
-
-
-
-                countPrev -= currEl.offsetWidth;
-                countNext += currEl.offsetWidth;
-                posts.style.left = Number(clickTrueStyle.slice(0, -2)) + currEl.offsetWidth + 'px';
-                console.log(Number(clickTrueStyle.slice(0, -2)))
-                if (Number(clickTrueStyle.slice(0, -2)) + currEl.offsetWidth === Number(trueStyle.slice(0, -2))) {
-                    nextBtn.style.pointerEvents = 'none';
-                    countNext = 0;
-                    console.log('ok')
-                }
-
-            });
-        }, 700);
-
-
-        return posts_data;
-    }
-    getPosts();
-
+    return posts_data;
 }
+getPosts();
 
 
 
 
 
-allAround()
+
+
+
 async function getPost(id) {
     const post_response = await fetch(`${URI}` + '/wp-json/wp/v2/posts/' + `${id}`); // http://imtles.noodless.co.ua/wp-json/wp/v2/posts/10
     const post_data = await post_response.json();
