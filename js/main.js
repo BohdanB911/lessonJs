@@ -1,4 +1,8 @@
+'use strict'
+
 ///////////////////////////////////////////////////
+
+
 const URI = 'http://imtles.noodless.co.ua';
 const PER_PAGE = 5;
 // login: admin
@@ -17,7 +21,7 @@ async function getPosts(page = 1) {
         const img_response = await fetch(`${URI}` + '/wp-json/wp/v2/media/' + `${id}`); // http://imtles.noodless.co.ua/wp-json/wp/v2/media/7
         const img_data = await img_response.json();
         return img_data;
-    }
+    };
 
     posts_data.map(async(postItem, index) => {
         const placeholder = {
@@ -29,7 +33,6 @@ async function getPosts(page = 1) {
                 }
             }
         };
-
         const image = postItem.featured_media ? await getImage(postItem.featured_media) : placeholder;
         const post = document.createElement('div');
         post.setAttribute('class', 'post_item')
@@ -38,9 +41,9 @@ async function getPosts(page = 1) {
         postTitle.innerHTML = postItem.title.rendered;
         const postText = document.createElement('p');
         postText.innerHTML = postItem.content.rendered;
+        const date = new Date(postItem.date);
         const postDate = document.createElement('p');
-        const subStr = postItem.date.substring(0, 9);
-        postDate.innerHTML = subStr;
+        postDate.innerHTML = `${date.getDate()}. ${date.getMonth() + 1}. ${date.getFullYear()}`;
         const postImage = document.createElement('img');
         postImage.setAttribute('src', `${image.media_details.sizes.thumbnail.source_url}`);
         postImage.setAttribute('class', `post_img`);
@@ -49,128 +52,37 @@ async function getPosts(page = 1) {
         btns.setAttribute('value', postItem.id);
         btns.setAttribute('class', 'post_btn');
         btns.setAttribute('onclick', `getPost(${btns.value})`);
-        btns.innerText = 'click here';
+        btns.innerText = 'Read more...';
+        const dotsWrap = document.querySelector('.dots');
+        const dotsItem = document.createElement('div');
+        dotsItem.setAttribute('class', 'dots_item')
+        dotsItem.setAttribute('data-dot', index);
+        // dotsItem.setAttribute('onclick', 'clickDots()')
         postsDiv.appendChild(post);
+        dotsWrap.appendChild(dotsItem)
         post.appendChild(postTitle);
         post.appendChild(postText);
         post.appendChild(postDate);
         post.appendChild(btns)
 
+        dotsItem.addEventListener('click', clickDots)
         return postsDiv;
     });
 
-    setTimeout(() => {
-        const postArr = document.getElementsByClassName('post_item');
-        const dots = document.getElementsByClassName('dots_item');
+    const postsArray = document.getElementsByClassName('post_item');
+    const dotsArray = document.getElementsByClassName('dots_item');
+    postsArray[0].classList.add('active');
+    dotsArray[0].classList.add('active_dot');
 
-
-        postArr[postArr.length - 1].classList.add('active');
-
-        let dotsArr = Array.from(dots);
-        dotsArr.reverse();
-        dotsArr[dotsArr.length - 1].classList.add('active_dot');
-
-        let newArr = Array.from(postArr);
-        let allWcount = 0;
-        newArr.forEach(item => {
-            allWcount += item.offsetWidth;
-        });
-        console.log(allWcount);
-
-
-        const postsTrue = document.querySelector('.all_posts');
-        const prevBtn = document.querySelector('.prev_arrow');
-        const nextBtn = document.querySelector('.next_arrow');
-
-
-
-        postsTrue.style.left = -allWcount + newArr[0].offsetWidth + 'px';
-        let countPrev = 0;
-        prevBtn.addEventListener('click', function() {
-
-            nextBtn.style.pointerEvents = 'auto';
-            const dots = document.querySelector('.dots');
-            const posts = document.querySelector('.all_posts');
-            const currEl = document.querySelector('.active');
-            const currElDots = document.querySelector('.active_dot');
-            let clickTrueStyle = getComputedStyle(posts).left;
-
-            if (!posts.lastElementChild.classList.contains('active')) {
-                currEl.nextElementSibling.classList.add('active');
-                currEl.classList.remove('active');
-            };
-            if (!dots.firstElementChild.classList.contains('active_dot')) {
-                currElDots.previousElementSibling.classList.add('active_dot');
-                currElDots.classList.remove('active_dot');
-            }
-            if (posts.lastElementChild.getAttribute('data-slide') === currEl.getAttribute('data-slide')) {
-                posts.firstElementChild.classList.add('active');
-                posts.lastElementChild.classList.remove('active');
-            };
-            if (dots.firstElementChild.getAttribute('data-dot') === currElDots.getAttribute('data-dot')) {
-                dots.lastElementChild.classList.add('active_dot');
-                dots.firstElementChild.classList.remove('active_dot');
-            }
-
-            countPrev -= currEl.offsetWidth;
-
-            posts.style.left = Number(clickTrueStyle.slice(0, -2)) - currEl.offsetWidth + 'px';
-            if (Math.abs(Number(clickTrueStyle.slice(0, -2)) - currEl.offsetWidth) === allWcount) {
-                postsTrue.style.left = '0px';
-                countPrev = 0;
-            }
-
-        });
-        let countNext = 0;
-        nextBtn.addEventListener('click', function() {
-
-            const posts = document.querySelector('.all_posts');
-            const dots = document.querySelector('.dots');
-            const currEl = document.querySelector('.active');
-            const currElDots = document.querySelector('.active_dot');
-            let clickTrueStyle = getComputedStyle(posts).left;
-
-            if (!posts.firstElementChild.classList.contains('active')) {
-                currEl.previousElementSibling.classList.add('active');
-                currEl.classList.remove('active');
-            };
-            if (!dots.lastElementChild.classList.contains('active_dot')) {
-                currElDots.nextElementSibling.classList.add('active_dot');
-                currElDots.classList.remove('active_dot');
-            }
-            if (posts.firstElementChild.getAttribute('data-slide') === currEl.getAttribute('data-slide')) {
-                posts.lastElementChild.classList.add('active');
-                posts.firstElementChild.classList.remove('active');
-            };
-            if (dots.lastElementChild.getAttribute('data-dot') === currElDots.getAttribute('data-dot')) {
-                dots.firstElementChild.classList.add('active_dot');
-                dots.lastElementChild.classList.remove('active_dot');
-            };
-
-            countNext += currEl.offsetWidth;
-            posts.style.left = Number(clickTrueStyle.slice(0, -2)) + currEl.offsetWidth + 'px';
-            let trueStyle = getComputedStyle(postsTrue).left;
-
-            if (Number(trueStyle.slice(0, -2)) === currEl.offsetWidth) {
-                postsTrue.style.left = -allWcount + newArr[0].offsetWidth + 'px';
-                countNext = 0;
-            }
-        });
-    }, 700);
-
+    sliderTemp(false)
 
     return posts_data;
-}
+
+};
 getPosts();
 
 
-
-
-
-
-
-
-async function getPost(id) {
+const getPost = async(id) => {
     const post_response = await fetch(`${URI}` + '/wp-json/wp/v2/posts/' + `${id}`); // http://imtles.noodless.co.ua/wp-json/wp/v2/posts/10
     const post_data = await post_response.json();
     const placeholder = {
@@ -182,19 +94,14 @@ async function getPost(id) {
             }
         }
     };
-
-
-
-
     async function getImage(id) {
         const img_response = await fetch(`${URI}` + '/wp-json/wp/v2/media/' + `${id}`); // http://imtles.noodless.co.ua/wp-json/wp/v2/media/7
         const img_data = await img_response.json();
         return img_data;
-    }
+    };
     const image = post_data.featured_media ? await getImage(post_data.featured_media) : placeholder;
     const thisP = document.getElementById('pop_up-wrap');
     thisP.style.display = 'flex';
-
     const postImage = document.createElement('img');
     postImage.setAttribute('src', `${image.media_details.sizes.thumbnail.source_url}`);
     postImage.setAttribute('class', `post_img`);
@@ -208,9 +115,9 @@ async function getPost(id) {
     postTitle.innerHTML = post_data.title.rendered;
     const postText = document.createElement('p');
     postText.innerHTML = post_data.content.rendered;
+    const date = new Date(post_data.date);
     const postDate = document.createElement('p');
-    const subStr = post_data.date.substring(0, 9);
-    postDate.innerHTML = subStr;
+    postDate.innerHTML = `${date.getDate()}. ${date.getMonth() + 1}. ${date.getFullYear()}`;
     thisP.appendChild(post);
     post.appendChild(close);
     post.appendChild(postImage);
@@ -221,5 +128,81 @@ async function getPost(id) {
         thisP.innerHTML = '';
         thisP.style.display = 'none';
     });
-    // console.log(post_data)
+    sliderTemp(true)
+        // console.log(post_data)
+};
+
+
+
+const prevBtn = document.querySelector('.prev_arrow');
+const nextBtn = document.querySelector('.next_arrow');
+let click = function() {
+    const posts = document.querySelector('.all_posts');
+    const currEl = document.querySelector('.active');
+    const currElDots = document.querySelector('.active_dot');
+    const dots = document.querySelector('.dots')
+
+    if (!posts.lastElementChild.classList.contains('active')) {
+        currEl.nextElementSibling.classList.add('active');
+        currEl.classList.remove('active');
+    };
+    if (!dots.lastElementChild.classList.contains('active_dot')) {
+        currElDots.nextElementSibling.classList.add('active_dot');
+        currElDots.classList.remove('active_dot');
+    }
+    if (posts.lastElementChild.getAttribute('data-slide') === currEl.getAttribute('data-slide')) {
+        posts.firstElementChild.classList.add('active');
+        posts.lastElementChild.classList.remove('active');
+    };
+    if (dots.lastElementChild.getAttribute('data-dot') === currElDots.getAttribute('data-dot')) {
+        dots.firstElementChild.classList.add('active_dot');
+        dots.lastElementChild.classList.remove('active_dot');
+    };
 }
+
+nextBtn.addEventListener('click', click);
+
+prevBtn.addEventListener('click', function() {
+    const posts = document.querySelector('.all_posts');
+    const currEl = document.querySelector('.active');
+    const currElDots = document.querySelector('.active_dot');
+    const dots = document.querySelector('.dots')
+
+    if (!posts.firstElementChild.classList.contains('active')) {
+        currEl.previousElementSibling.classList.add('active');
+        currEl.classList.remove('active');
+    };
+
+    if (!dots.firstElementChild.classList.contains('active_dot')) {
+        currElDots.previousElementSibling.classList.add('active_dot');
+        currElDots.classList.remove('active_dot');
+    };
+    if (posts.firstElementChild.getAttribute('data-slide') === currEl.getAttribute('data-slide')) {
+        posts.lastElementChild.classList.add('active');
+        posts.firstElementChild.classList.remove('active');
+    };
+
+    if (dots.firstElementChild.getAttribute('data-dot') === currElDots.getAttribute('data-dot')) {
+        dots.lastElementChild.classList.add('active_dot');
+        dots.firstElementChild.classList.remove('active_dot');
+    };
+});
+
+const sliderTemp = function(booleanValue) {
+    if (!booleanValue) {
+        setInterval(click, 3000);
+    } else if (booleanValue) {
+        clearInterval(click)
+    }
+};
+
+function clickDots() {
+    const post = document.querySelector('.active');
+    post.classList.remove('active')
+    const currElDot = document.querySelector('.active_dot');
+    currElDot.classList.remove('active_dot');
+    this.classList.add('active_dot');
+    const dotValue = this.getAttribute('data-dot');
+    const getItemAttr = document.querySelectorAll(`[data-slide="${dotValue}"]`);
+    getItemAttr[0].classList.add('active');
+};
